@@ -59,30 +59,8 @@ public class RBTree<T> {
 
 
 
-    public  List<Integer> result = new ArrayList<>();
 
-    //校验整棵树是否符合规则
-    public void checkTree(Node node) {
-        int count = 0;
-        if (!node.hasSon()) {
-            count = checkNode(node, 0);
-            result.add(count);
-        }
-    }
 
-    public void checkTree(){
-        checkTree(root);
-    }
-
-    public int checkNode(Node node, int count) {
-        if (node.color) {
-            count = count + 1;
-        }
-        if (node.equals(root)) {
-            return count;
-        }
-        return checkNode(node.father, count);
-    }
 
 
     public void add(T element) {
@@ -150,12 +128,10 @@ public class RBTree<T> {
      * @param node 插入节点的父节点
      */
     public void left(Node node) {
-//        rotating(node, false);
         changeColorRotate(node, false,null);
     }
 
     public void right(Node node) {
-//        rotating(node, true);
         changeColorRotate(node, true,null);
     }
 
@@ -327,55 +303,11 @@ public class RBTree<T> {
                     node.right.color = tmp;
                 }
             }
-
-//            checkColor(node.left);
         }
 
 
     }
 
-//    public void changeColorRotateBackup(Node node, boolean direction, boolean isTransition) {
-//        Node father = node.father;
-//        boolean tmp = node.color;
-//        node.father = father.father;
-//        if (father.equals(root)) {
-//            root = node;
-//        } else if (father.equals(father.father.left)) {
-//            father.father.left = node;
-//        } else {
-//            father.father.right = node;
-//        }
-//        father.father = node;
-//        node.color = father.color;
-//        father.color = tmp;
-//        if (direction) {
-//            if (node.right == null) {
-//                father.left = null;
-//            } else {
-//                node.right.father = father;
-//                father.left = node.right;
-//            }
-//            node.right = father;
-//            if (node.left != null && !isTransition) {
-//                node.left.color = tmp;
-//            }
-////            checkColor(node.right);
-//        } else {
-//            if (node.left == null) {
-//                father.right = null;
-//            } else {
-//                node.left.father = father;
-//                father.right = node.left;
-//            }
-//            node.left = father;
-//            if (node.right != null && !isTransition) {
-//                node.right.color = tmp;
-//            }
-////            checkColor(node.left);
-//        }
-//
-//
-//    }
 
     private void remove(Node node) {
         Node father = node.father;
@@ -458,7 +390,7 @@ public class RBTree<T> {
 
     }
 
-
+    // ================================================以下代码皆是遍历和测试代码=======================================
     //前序遍历
     private void traversal(Node node) {
         System.out.println(node.value);
@@ -470,6 +402,12 @@ public class RBTree<T> {
         }
     }
 
+    /**
+     * 前序遍历，获取第一条线路黑色节点数量
+     * @param node
+     * @param count
+     * @return
+     */
     private int qianxu(Node node,int count){
         if(node.color){
             count ++;
@@ -555,11 +493,7 @@ public class RBTree<T> {
         }
         if (!node.color) {
             System.out.println(node.value + "==>>" + (node.color ? "黑色" : "红色"));
-//            if (node.father != null && node.father.color) {
-//
-//            }
         }
-        checkTree(node);
         if (node.right != null) {
             middlePrint(node.right);
         }
