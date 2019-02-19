@@ -12,7 +12,7 @@ public class RBTreeDebug {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-        int count = 1000;
+        int count = 5;
         for (int i = 0; i < count; i++) {
             Thread thread = new Thread(new RBTreeTest());
             thread.start();
